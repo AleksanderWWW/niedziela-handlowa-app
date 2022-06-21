@@ -4,6 +4,7 @@ Main runable application module. Run directly by:
  """
 
 import json
+import logging
 
 from backend import data_load
 
@@ -16,6 +17,10 @@ def main():
     # read configuration file
     with open("config.json", "r", encoding="utf-8") as config_fp:
         config = json.load(config_fp)
+
+    # configure logging
+    fmt = config["general"]["logging_fmt"]
+    logging.basicConfig(format=fmt, level=logging.INFO)
     
     # instantiate data loader
     cal_url = config["backend"]["calendar_url"]

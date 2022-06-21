@@ -1,4 +1,7 @@
 {
+    "general": {
+        "logging_fmt": "%(asctime)s %(levelname)s - %(funcName)s - %(message)s"
+    },
     "backend": {
         "calendar_url": "https://www.kalendarzswiat.pl/niedziele_handlowe/"
     }
