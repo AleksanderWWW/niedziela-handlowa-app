@@ -3,7 +3,8 @@ import logging
 
 import requests
 
-from bs4 import BeautifulSoup
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
 from urllib.parse import urljoin
 
 from backend import backend_exceptions
@@ -48,6 +49,7 @@ class DataLoader:
                 logging.info("returning empty string since force_on_error=False")
                 return ""
             
+            requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
             logging.info("disabling certificate verification and retrying")
             response = requests.get(url, verify=False)
 
