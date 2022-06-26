@@ -1,5 +1,7 @@
+import os
 import typing
 import logging
+
 
 import requests
 
@@ -14,6 +16,7 @@ class DataLoader:
 
     def __init__(self, calendar_url: str) -> None:
         self.calendar_url = calendar_url
+        self.sundays_file_template = "sundays_{year}.txt"
 
     def load_raw_data(self, year: typing.Union[int, str], 
                       force_on_error: bool = False) -> str:
@@ -39,6 +42,12 @@ class DataLoader:
         except ValueError:
             raise backend_exceptions.InvalidInputParameters(f"Provided year {year} is invalid")
 
+        # handle a case where data for the chosen year had already been loaded
+        if os.path.isfile(self.sundays_file_template.format(year=year)):
+            logging.info("Loading already present content")
+            with open(self.sundays_file_template.format(year=year), "r", encoding="utf-8") as fp:
+                return fp.read()
+
         url = urljoin(self.calendar_url, str(year))
 
         try:
@@ -52,5 +61,9 @@ class DataLoader:
             requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
             logging.info("disabling certificate verification and retrying")
             response = requests.get(url, verify=False)
+
+        # save content to a file
+        with open(self.sundays_file_template.format(year=year), "w", encoding="utf-8") as fp:
+            fp.write(response.text)
 
         return response.text
