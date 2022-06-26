@@ -24,6 +24,11 @@ class DataParser:
         self.html_parser = html_parser
         self.soup = BeautifulSoup(page_source, html_parser)
 
+    def set_page_source(self, new_page_source: str):
+        """Sets page source and BeautifulSoup object based
+        on new html content"""
+        self.page_source = new_page_source
+        self.soup = BeautifulSoup(self.page_source, self.html_parser)
 
     def find_raw_dates(self) -> typing.List[str]:
         """
