@@ -1,9 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <body>
-<h2>Results</h3>
+<h2>Rezultat</h3>
 
-<h4>Chosen Date is: {{session['date']}}</h4>
+<h4>Wybrana data: {{session['date']}}</h4>
+<br>
+<h4>{{session["is_trade_free"]}}</h4>
 
 <form>
     <input type="button" value="Powrót" onclick="history.back()">
