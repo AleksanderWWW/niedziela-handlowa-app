@@ -22,6 +22,11 @@ class WebAppTest(unittest.TestCase):
         
         self.assertEqual(code, 200)
 
+    def test_index_content(self):
+        tester = self.WEB_APP.app.test_client()
+        response = tester.get("/")
+        self.assertEqual(response.content_type, "text/html; charset=utf-8")
+
 
 
 if __name__ == "__main__":
