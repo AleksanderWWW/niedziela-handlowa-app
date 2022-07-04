@@ -9,8 +9,8 @@ APP.config['SECRET_KEY'] = '#$%^&*'
 
 
 class InfoForm(FlaskForm):
-    submit = SubmitField('Submit')
-    date_field = DateField('Date', format='%Y-%m-%d', validators=(validators.DataRequired(),))
+    submit = SubmitField('Sprawdź')
+    date_field = DateField('Data', format='%Y-%m-%d', validators=(validators.DataRequired(),))
 
 
 """ class WebApp(FlaskView):
