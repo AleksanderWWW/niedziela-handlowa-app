@@ -1,6 +1,5 @@
 import json
 import unittest
-from app import main
 
 from frontend.web_app import WebApp
 from backend import Backend
