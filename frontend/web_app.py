@@ -54,6 +54,7 @@ class WebApp:
     def __init__(self, backend_inter) -> None:
         global wrapper
         wrapper.set_backend(backend_inter)
+        self.app = APP
 
     @APP.route("/", methods=["GET", "POST"])
     def index():
